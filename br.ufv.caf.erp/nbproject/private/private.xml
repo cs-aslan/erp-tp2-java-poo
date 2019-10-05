@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/model/persistence/DAOAddress.java</file>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/controller/ControllerAddress.java</file>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/model/entity/Address.java</file>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/model/entity/Customer.java</file>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/model/persistence/DAOProduct.java</file>
+            <file>file:/home/aslan/Desktop/erp-tp2-java-poo/br.ufv.caf.erp/src/br/ufv/caf/erp/controller/ControllerProduct.java</file>
+        </group>
+    </open-files>
+</project-private>
