@@ -10,12 +10,15 @@ package br.ufv.caf.erp.model.entity;
  * @author aslan
  */
 public class Product {
+
     private final int code;
     private String name;
     private String description;
     private int quantity;
     private String category;
     private double price;
+    
+    private boolean salable;
     
     /**
      *
@@ -33,6 +36,8 @@ public class Product {
         this.quantity = quantity;
         this.category = category;
         this.price = price;
+        
+        this.salable = true;
     }
 
     /**
@@ -113,12 +118,17 @@ public class Product {
     }
     
     /**
-     *  Just for debug
-     * @return 
+     * @return the active
      */
-    @Override
-    public String toString(){
-        return "Nome: " + this.name;
+    public boolean isSalable() {
+        return salable;
+    }
+
+    /**
+     * @param salable
+     */
+    public void setSalable(boolean salable) {
+        this.salable = salable;
     }
     
 }

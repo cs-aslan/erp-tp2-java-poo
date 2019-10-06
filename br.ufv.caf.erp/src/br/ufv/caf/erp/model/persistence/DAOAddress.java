@@ -40,7 +40,7 @@ public class DAOAddress {
      *
      * @return
      */
-    public ArrayList<Address> get(){
+    public ArrayList<Address> getAllAddress(){
         return this.addresses;
     }
     
@@ -72,5 +72,18 @@ public class DAOAddress {
             }
         }
         return null;
+    }
+    
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public ArrayList<Address> searchByName(String name){
+        ArrayList<Address> searched = new ArrayList();
+        addresses.stream().filter((p) -> (p.getName().startsWith(name))).forEachOrdered((p) -> {
+            searched.add(p);
+        });
+        return searched;
     }
 }

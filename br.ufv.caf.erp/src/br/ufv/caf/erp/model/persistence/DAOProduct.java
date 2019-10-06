@@ -68,11 +68,17 @@ public class DAOProduct {
     /**
      * @return the products
      */
-    public ArrayList<Product> get() {
+    public ArrayList<Product> getAllProducts() {
         return products;
     }
     
-    public Product changeQuantity(int code, int quantity){
+    /**
+     *
+     * @param code
+     * @param quantity
+     * @return
+     */
+    public Product setQuantity(int code, int quantity){
         Product product = search(code);
         
         if(product==null) return null;
@@ -84,18 +90,70 @@ public class DAOProduct {
     /**
      *
      * @param code
+     * @param salable
+     * @return
+     */
+    public Product setSalable(int code, boolean salable){
+        Product product = search(code);
+        
+        if(product==null) return null;
+        
+        product.setSalable(salable);
+        return product;
+    }
+    
+    /**
+     *
+     * @param code
      * @return
      */
     public Product remove(int code){
-        Product product;
-        for(int i=0; i<products.size(); i++){
-            product = products.get(i);
-            if(product.getCode() == code){
-                return products.remove(i);
+        for(Product p : products){
+            if(p.getCode() == code){
+                p.setSalable(false);
+                return p;
             }
         }
         return null;
     }
     
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Product> getAllSalableProducts(){
+        ArrayList<Product> salable = new ArrayList();
+        
+        products.stream().filter((p) -> (p.isSalable())).forEachOrdered((p) -> {
+            salable.add(p);
+        });
+            
+        return salable;
+    }
     
+    /**
+     *
+     * @param code
+     * @return
+     */
+    public int getQuantity(int code){
+        Product product = search(code);
+        
+        if(product==null) return 0;
+
+        return product.getQuantity();
+    }
+    
+    /**
+     *
+     * @param code
+     * @return
+     */
+    public boolean isSalable(int code){
+        Product product = search(code);
+        
+        if(product==null) return false;
+
+        return product.isSalable();
+    }
 }

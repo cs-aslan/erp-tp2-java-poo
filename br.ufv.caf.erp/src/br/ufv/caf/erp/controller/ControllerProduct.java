@@ -40,8 +40,8 @@ public class ControllerProduct {
      *
      * @return
      */
-    public ArrayList<Product> getProducts(){
-        return persistence.get();
+    public ArrayList<Product> getAllProducts(){
+        return persistence.getAllProducts();
     }
     
     /**
@@ -53,14 +53,14 @@ public class ControllerProduct {
         return persistence.searchByName(name);
     }
     
-    /**
-     *
-     * @param code
-     * @return
-     */
-    public Product remove(int code){
-        return persistence.remove(code);
-    }
+//    /**
+//     *
+//     * @param code
+//     * @return
+//     */
+//    public Product remove(int code){
+//        return persistence.remove(code);
+//    }
     
     /**
      *
@@ -68,8 +68,44 @@ public class ControllerProduct {
      * @param quantity
      * @return
      */
-    public Product changeQuantity(int code, int quantity){
-        return persistence.changeQuantity(code, quantity);
+    public Product setQuantity(int code, int quantity){
+        return persistence.setQuantity(code, quantity);
+    }
+    
+    /**
+     *
+     * @param code
+     * @param salable
+     * @return
+     */
+    public Product setSalable(int code, boolean salable){
+        return persistence.setSalable(code, salable);
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public ArrayList<Product> getAllSalableProducts(){
+        return persistence.getAllSalableProducts();
+    }
+    
+    /**
+     *
+     * @param code
+     * @return
+     */
+    public int getQuantity(int code){
+        return persistence.getQuantity(code);
+    }
+    
+    /**
+     *
+     * @param code
+     * @return
+     */
+    public boolean isSalable(int code){
+        return persistence.isSalable(code);
     }
     
 }
