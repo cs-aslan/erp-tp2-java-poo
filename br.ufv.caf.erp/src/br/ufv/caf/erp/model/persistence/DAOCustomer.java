@@ -191,4 +191,12 @@ public class DAOCustomer {
         return searched.isActive();
     }
     
+    public boolean checkPassword(int code, String password){
+        Customer searched = search(code);
+        
+        if(searched==null) return false;
+        
+        return searched.checkPassword(password);
+    }
+    
 }

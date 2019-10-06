@@ -99,8 +99,34 @@ public class ControllerCustomer {
         return persistence.getAllAddress(customerCode);
     }
     
+    /**
+     *
+     * @param customerCode
+     * @param addressName
+     * @param addressCode
+     * @param number
+     * @param street
+     * @param neighborhood
+     * @param city
+     * @param CEP
+     * @return
+     */
     public Address insertAddress(int customerCode, String addressName, int addressCode, int number, String street, String neighborhood, String city, int CEP){
         return persistence.insertAddress(customerCode, addressName, addressCode, number, street, neighborhood, city, CEP);
+    }
+    
+    /**
+     *
+     * @param customerCode
+     * @param addressCode
+     * @return
+     */
+    public Address searchAddress(int customerCode, int addressCode){
+        return persistence.searchAddress(customerCode, addressCode);
+    }
+    
+    public boolean checkPassword(int customerCode, String password){
+        return persistence.checkPassword(customerCode, password);
     }
     
 }

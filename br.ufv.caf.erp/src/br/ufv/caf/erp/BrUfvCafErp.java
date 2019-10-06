@@ -7,6 +7,10 @@ package br.ufv.caf.erp;
 
 import br.ufv.caf.erp.controller.ControllerCustomer;
 import br.ufv.caf.erp.controller.ControllerProduct;
+import br.ufv.caf.erp.controller.ControllerSales;
+import br.ufv.caf.erp.model.entity.ProductSold;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,16 +26,19 @@ public class BrUfvCafErp {
         
         ControllerProduct products = new ControllerProduct();
         ControllerCustomer customers = new ControllerCustomer();
+        ControllerSales sales = new ControllerSales();
+        ArrayList<ProductSold> shopList = new ArrayList();
+        LocalDate date = LocalDate.parse( "2016-09-20" );
         
         products.insert(5, "Bola de futebol", "Redonda", 5, "Esportes", 35.20);
         customers.insert(3, "Mateus", "10631890637", "mateus.p.silva@ufv.br", "dovahkiin");
         customers.insertAddress(3, "Casinha", 3, 47, "Rua arthur", "Centro", "Sao Jose", 35694000);
         
+        shopList.add(new ProductSold(5, 1));
+        
         //products.setSalable(5, false);
         
-        System.out.println(products.getAllSalableProducts());
-        System.out.println(customers.searchByName("Mat"));
-        System.out.println(customers.searchByName("Mat").get(0).getAllAddress());
+        System.out.println(sales.sell(0, 3, 3, "dovahkiin", date, shopList, customers, products));
     }
     
 }

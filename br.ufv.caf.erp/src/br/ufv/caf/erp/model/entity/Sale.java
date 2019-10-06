@@ -14,27 +14,35 @@ import java.util.ArrayList;
  * @author aslan
  */
 public class Sale {
+    private final int code;
     private final int clientCode;
     private final int addressCode;
     private SaleStatus saleStatus;
+    
+    private final ArrayList<ProductSold> products;
     
     private final LocalDate date;
     
     /**
      *
+     * @param code
      * @param clientCode
      * @param addressCode
      * @param date
+     * @param products
      */
-    public Sale(int clientCode, int addressCode, LocalDate date){
+    public Sale(int code, int clientCode, int addressCode, LocalDate date, ArrayList<ProductSold> products){
+        this.code = code;
         this.clientCode = clientCode;
         this.addressCode = addressCode;
         saleStatus = SaleStatus.pending;
         this.date = date;
+        this.products = products;
     }
-            
-            
-    private ArrayList<ProductSold> products;
+    
+    public int getCode(){
+        return code;
+    }
 
     /**
      * @return the clientCode

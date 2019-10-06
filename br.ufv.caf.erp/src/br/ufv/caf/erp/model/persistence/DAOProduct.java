@@ -139,7 +139,7 @@ public class DAOProduct {
     public int getQuantity(int code){
         Product product = search(code);
         
-        if(product==null) return 0;
+        if(product==null) return -1; // Just for convention
 
         return product.getQuantity();
     }
