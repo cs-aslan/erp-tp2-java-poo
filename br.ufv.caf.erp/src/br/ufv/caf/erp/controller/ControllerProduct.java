@@ -41,7 +41,7 @@ public class ControllerProduct {
      * @return
      */
     public ArrayList<Product> getProducts(){
-        return persistence.getProducts();
+        return persistence.get();
     }
     
     /**
