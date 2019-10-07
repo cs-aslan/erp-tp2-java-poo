@@ -131,4 +131,8 @@ public class Product {
         this.salable = salable;
     }
     
+    public String toString(){
+        return this.name;
+    }
+    
 }
