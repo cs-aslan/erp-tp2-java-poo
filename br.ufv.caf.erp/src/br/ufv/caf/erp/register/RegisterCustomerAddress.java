@@ -5,20 +5,20 @@
  */
 package br.ufv.caf.erp.register;
 
-import br.ufv.caf.erp.model.persistence.DAOCustomer;
+import br.ufv.caf.erp.controller.ControllerCustomer;
 
 /**
  *
  * @author Leandro Lázaro
  */
 public class RegisterCustomerAddress extends javax.swing.JFrame {
-    private DAOCustomer daoCustomer;
+    private ControllerCustomer ControllerCustomer;
     private int customerCode;
     /**
      * Creates new form RegisterCustomerAddress
      */
-    public RegisterCustomerAddress(DAOCustomer daoCustomer, int customerCode) {
-        this.daoCustomer=daoCustomer;
+    public RegisterCustomerAddress(ControllerCustomer ControllerCustomer, int customerCode) {
+        this.ControllerCustomer=ControllerCustomer;
         this.customerCode=customerCode;
         initComponents();
     }
@@ -149,7 +149,7 @@ public class RegisterCustomerAddress extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.daoCustomer.insertAddress(this.customerCode, this.name.getText(), Integer.parseInt(this.code.getText()), Integer.parseInt(this.number.getText()), this.street.getText(), this.neighborhood.getText(), this.city.getText(), Integer.parseInt(this.cep.getText()));
+        this.ControllerCustomer.insertAddress(this.customerCode, this.name.getText(), Integer.parseInt(this.code.getText()), Integer.parseInt(this.number.getText()), this.street.getText(), this.neighborhood.getText(), this.city.getText(), Integer.parseInt(this.cep.getText()));
         //System.exit(0);
         //this.setVisible(false);
         //this.dispose();

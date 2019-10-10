@@ -7,6 +7,7 @@ package br.ufv.caf.erp.controller;
 
 import br.ufv.caf.erp.model.entity.ProductSold;
 import br.ufv.caf.erp.model.entity.Sale;
+import br.ufv.caf.erp.model.enums.SaleStatus;
 import br.ufv.caf.erp.model.persistence.DAOSale;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -38,5 +39,17 @@ public class ControllerSales {
         }
         
         return persistence.insert(sellCode, customerCode, addressCode, date, productList);
+    }
+    
+    public void setSaleStatus(int code, SaleStatus saleStatus){
+        this.persistence.setSaleStatus(code, saleStatus);
+    }
+    
+    public ArrayList<Sale> getAllSales(){
+        return this.persistence.getAllSales();
+    }
+    
+    public ArrayList<Sale> searchByDate(LocalDate date){
+        return this.persistence.searchByDate(date);
     }
 }

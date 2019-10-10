@@ -37,11 +37,15 @@ public class ControllerCustomer {
         return persistence.insert(code, name, CPF, email, password);
     }
     
+    public Customer search(int code){
+        return this.persistence.search(code);
+    }
+    
     /**
      *
      * @return
      */
-    public ArrayList<Customer> getAllProducts(){
+    public ArrayList<Customer> getAllCustomers(){
         return persistence.getAllCustomers();
     }
     

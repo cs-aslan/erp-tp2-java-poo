@@ -59,7 +59,7 @@ public class DAOProduct {
      */
     public ArrayList<Product> searchByName(String name){
         ArrayList<Product> searched = new ArrayList();
-        products.stream().filter((p) -> (p.getName().startsWith(name))).forEachOrdered((p) -> {
+        products.stream().filter((p) -> (p.getName().startsWith(name)) && p.isSalable()).forEachOrdered((p) -> {
             searched.add(p);
         });
         return searched;

@@ -9,9 +9,9 @@ import br.ufv.caf.erp.model.entity.Address;
 import br.ufv.caf.erp.model.entity.Customer;
 import br.ufv.caf.erp.model.entity.Product;
 import br.ufv.caf.erp.model.entity.ProductSold;
-import br.ufv.caf.erp.model.persistence.DAOCustomer;
-import br.ufv.caf.erp.model.persistence.DAOProduct;
-import br.ufv.caf.erp.model.persistence.DAOSale;
+import br.ufv.caf.erp.controller.ControllerCustomer;
+import br.ufv.caf.erp.controller.ControllerProduct;
+import br.ufv.caf.erp.controller.ControllerSales;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -21,17 +21,17 @@ import javax.swing.DefaultListModel;
  * @author aslan
  */
 public class RegisterSale extends javax.swing.JFrame {
-    private DAOProduct daoProduct;
-    private DAOCustomer daoCustomer;
-    private DAOSale daoSale;
+    private ControllerProduct ControllerProduct;
+    private ControllerCustomer ControllerCustomer;
+    private ControllerSales ControllerSales;
     private ArrayList<ProductSold> listProductSold;
     /**
      * Creates new form RegisterVenda
      */
-    public RegisterSale(DAOProduct daoProduct, DAOCustomer daoCustomer, DAOSale daoSale) {
-        this.daoProduct=daoProduct;
-        this.daoCustomer=daoCustomer;
-        this.daoSale=daoSale;
+    public RegisterSale(ControllerProduct ControllerProduct, ControllerCustomer ControllerCustomer, ControllerSales ControllerSales) {
+        this.ControllerProduct=ControllerProduct;
+        this.ControllerCustomer=ControllerCustomer;
+        this.ControllerSales=ControllerSales;
         this.listProductSold=new ArrayList();
         initComponents();
         updateJComboBoxProducts();
@@ -183,18 +183,20 @@ public class RegisterSale extends javax.swing.JFrame {
         this.listProductSold.add(productSale);
         
         for(ProductSold productSold:this.listProductSold){
-            lista.addElement(this.daoProduct.search(productSold.getProductCode()));
+            lista.addElement(this.ControllerProduct.search(productSold.getProductCode()));
         }
    
         this.jListSaleProducts.setModel(lista);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.daoSale.insert(Integer.parseInt(this.jTextFieldCode.getText()), ((Customer)this.jComboBoxCustomers.getSelectedItem()).getCode(), ((Address)this.jComboBoxAddress.getSelectedItem()).getCode(), LocalDate.MAX, this.listProductSold);
+        this.ControllerSales.sell(Integer.parseInt(this.jTextFieldCode.getText()), ((Customer)this.jComboBoxCustomers.getSelectedItem()).getCode(), 
+                ((Address)this.jComboBoxAddress.getSelectedItem()).getCode(), ((Customer)this.jComboBoxCustomers.getSelectedItem()).getPassword(), 
+                LocalDate.now(), this.listProductSold, this.ControllerCustomer, this.ControllerProduct);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void updateJComboBoxCustomers(){
-        for(Customer customer: this.daoCustomer.getAllCustomers()){
+        for(Customer customer: this.ControllerCustomer.getAllCustomers()){
             this.jComboBoxCustomers.addItem(customer);
         }
         
@@ -208,7 +210,7 @@ public class RegisterSale extends javax.swing.JFrame {
     }
     
     public void updateJComboBoxProducts(){
-        for(Product product: this.daoProduct.getAllProducts()){
+        for(Product product: this.ControllerProduct.getAllProducts()){
             System.out.println(product);
             this.jComboBoxProducts.addItem(product);
         }

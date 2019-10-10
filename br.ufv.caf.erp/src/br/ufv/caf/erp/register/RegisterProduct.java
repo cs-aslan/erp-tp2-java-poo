@@ -5,20 +5,20 @@
  */
 package br.ufv.caf.erp.register;
 
-import br.ufv.caf.erp.model.persistence.DAOProduct;
+import br.ufv.caf.erp.controller.ControllerProduct;
 
 /**
  *
  * @author aslan
  */
 public class RegisterProduct extends javax.swing.JFrame {
-    DAOProduct daoProduct;
+    ControllerProduct ControllerProduct;
     /**
      * Creates new form RegisterProduct
-     * @param daoProduct
+     * @param ControllerProduct
      */
-    public RegisterProduct(DAOProduct daoProduct) {
-        this.daoProduct=daoProduct;
+    public RegisterProduct(ControllerProduct ControllerProduct) {
+        this.ControllerProduct=ControllerProduct;
         initComponents();
     }
 
@@ -152,7 +152,7 @@ public class RegisterProduct extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        daoProduct.insert(Integer.parseInt(this.code.getText()), this.name.getText(), this.description.getText(), Integer.parseInt(this.quantity.getText()), this.category.getText(), Double.parseDouble(this.price.getText()));
+        ControllerProduct.insert(Integer.parseInt(this.code.getText()), this.name.getText(), this.description.getText(), Integer.parseInt(this.quantity.getText()), this.category.getText(), Double.parseDouble(this.price.getText()));
         //System.exit(0);
         //this.setVisible(false);
         //this.dispose();

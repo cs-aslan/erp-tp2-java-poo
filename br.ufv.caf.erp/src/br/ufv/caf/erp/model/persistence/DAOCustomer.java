@@ -57,7 +57,7 @@ public class DAOCustomer {
      */
     public ArrayList<Customer> searchByName(String name){
         ArrayList<Customer> searched = new ArrayList();
-        customers.stream().filter((p) -> (p.getName().startsWith(name))).forEachOrdered((p) -> {
+        customers.stream().filter((p) -> (p.getName().startsWith(name) && p.isActive())).forEachOrdered((p) -> {
             searched.add(p);
         });
         return searched;

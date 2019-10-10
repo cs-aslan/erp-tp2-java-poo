@@ -5,19 +5,19 @@
  */
 package br.ufv.caf.erp.register;
 
-import br.ufv.caf.erp.model.persistence.DAOCustomer;
+import br.ufv.caf.erp.controller.ControllerCustomer;
 
 /**
  *
  * @author Leandro Lázaro
  */
 public class RegisterCustomer extends javax.swing.JFrame {
-    private DAOCustomer daoCustomer;
+    private ControllerCustomer ControllerCustomer;
     /**
      * Creates new form RegisterCustomer
      */
-    public RegisterCustomer(DAOCustomer daoCustomer) {
-        this.daoCustomer=daoCustomer;
+    public RegisterCustomer(ControllerCustomer ControllerCustomer) {
+        this.ControllerCustomer=ControllerCustomer;
         initComponents();
     }
 
@@ -124,7 +124,7 @@ public class RegisterCustomer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        this.daoCustomer.insert(Integer.parseInt(this.code.getText()), this.name.getText(), this.cpf.getText(), this.email.getText(), this.password.getText());
+        this.ControllerCustomer.insert(Integer.parseInt(this.code.getText()), this.name.getText(), this.cpf.getText(), this.email.getText(), this.password.getText());
         //System.exit(0);
         //this.setVisible(false);
         //this.dispose();

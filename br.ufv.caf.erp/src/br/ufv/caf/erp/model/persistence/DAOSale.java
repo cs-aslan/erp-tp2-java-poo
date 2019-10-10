@@ -53,6 +53,16 @@ public class DAOSale {
         return null;
     }
     
+    public ArrayList<Sale> searchByDate(LocalDate date){
+        ArrayList<Sale> sales=new ArrayList();
+        for(Sale sale: this.sales){
+            if(sale.getDate().compareTo(date)==0){
+                sales.add(sale);
+            }
+        }
+        return sales;
+    }
+    
     /**
      *
      * @param code

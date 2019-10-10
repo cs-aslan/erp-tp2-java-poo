@@ -36,6 +36,10 @@ public class ControllerProduct {
         return persistence.insert(code, name, description, quantity, category, price);
     }
     
+    public Product search(int code){
+        return this.persistence.search(code);
+    }
+    
     /**
      *
      * @return
