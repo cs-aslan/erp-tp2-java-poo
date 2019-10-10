@@ -8,7 +8,9 @@ package br.ufv.caf.erp;
 import br.ufv.caf.erp.model.entity.Address;
 import br.ufv.caf.erp.model.entity.Customer;
 import br.ufv.caf.erp.model.entity.Product;
+import br.ufv.caf.erp.model.entity.ProductSold;
 import br.ufv.caf.erp.model.entity.Sale;
+import br.ufv.caf.erp.model.enums.SaleStatus;
 import br.ufv.caf.erp.model.persistence.DAOCustomer;
 import br.ufv.caf.erp.model.persistence.DAOProduct;
 import br.ufv.caf.erp.model.persistence.DAOSale;
@@ -19,6 +21,7 @@ import br.ufv.caf.erp.register.RegisterSale;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JList;
 
 /**
@@ -35,10 +38,12 @@ public class Interface extends javax.swing.JFrame {
      * Creates new form Interface
      */
     public Interface() {
+        ImageIcon icon = new ImageIcon("./et.jpg");
         this.daoProduct=new DAOProduct();
         this.daoCustomer=new DAOCustomer();
         this.daoSale=new DAOSale();
         initComponents();
+        this.jLabelLogo.setIcon(icon);
     }
 
     /**
@@ -51,6 +56,9 @@ public class Interface extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabelLogo = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -95,14 +103,48 @@ public class Interface extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jComboBoxSales = new javax.swing.JComboBox<>();
         jLabel16 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jTextFieldSaleCustomer = new javax.swing.JTextField();
+        jComboBoxSaleProducts = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        jComboBoxSaleStatus = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jTextFieldSaleAddress = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel20.setText("Bem vindo ao sistema da Ivone");
+
+        jLabelLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/ufv/caf/erp/logo.jpeg"))); // NOI18N
+        jLabelLogo.setText("jLabel21");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel20))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel20)
+                .addGap(60, 60, 60)
+                .addComponent(jLabelLogo)
+                .addContainerGap(422, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Home", jPanel4);
 
         jLabel1.setText("Produtos");
 
@@ -233,7 +275,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
                     .addComponent(jToggleButton2))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Produtos", jPanel1);
@@ -379,7 +421,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jToggleButton6)
                     .addComponent(jToggleButton5))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(290, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Clientes", jPanel2);
@@ -393,17 +435,34 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jLabel16.setText("Cliente:");
+        jComboBoxSales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxSalesActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel16.setText("Cliente:");
 
         jLabel17.setText("Produtos:");
 
         jLabel18.setText("Status:");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxSaleStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pending", "inProgress", "delivered" }));
 
         jButton4.setText("Editar Status");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
+        jLabel19.setText("Endereço:");
+
+        jTextFieldSaleAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldSaleAddressActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -417,18 +476,20 @@ public class Interface extends javax.swing.JFrame {
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
                         .addComponent(jButton3))
-                    .addComponent(jTextField1)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldSaleCustomer)
+                    .addComponent(jComboBoxSaleProducts, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBoxSaleStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton4))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel16)
                             .addComponent(jLabel17)
-                            .addComponent(jLabel18))
+                            .addComponent(jLabel18)
+                            .addComponent(jLabel19))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton4)))
+                    .addComponent(jTextFieldSaleAddress))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -440,21 +501,25 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jComboBoxSales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldSaleCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel19)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldSaleAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxSaleProducts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxSaleStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4)
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(422, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Vendas", jPanel3);
@@ -603,6 +668,48 @@ public class Interface extends javax.swing.JFrame {
         });
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextFieldSaleAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldSaleAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldSaleAddressActionPerformed
+
+    private void jComboBoxSalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxSalesActionPerformed
+        Sale sale=(Sale)this.jComboBoxSales.getSelectedItem();
+        if(sale!=null){            
+            this.jTextFieldSaleCustomer.setText(this.daoCustomer.search(sale.getClientCode()).getName());
+            this.jTextFieldSaleAddress.setText(this.daoCustomer.searchAddress(sale.getClientCode(), sale.getAddressCode()).toString());
+            
+            this.jComboBoxSaleProducts.removeAllItems();
+            for(ProductSold productSold:sale.getProducts()){
+                this.jComboBoxSaleProducts.addItem(this.daoProduct.search(productSold.getProductCode()));
+            }
+                    
+            SaleStatus saleStatus=sale.getSaleStatus();
+            if(saleStatus==SaleStatus.pending){
+                this.jComboBoxSaleStatus.setSelectedIndex(0);
+            }else if(saleStatus==SaleStatus.inProgress){
+                this.jComboBoxSaleStatus.setSelectedIndex(1);
+            }else{
+                this.jComboBoxSaleStatus.setSelectedIndex(2);
+            }
+            
+        }
+    }//GEN-LAST:event_jComboBoxSalesActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        Sale sale=(Sale)this.jComboBoxSales.getSelectedItem();
+        int selectedStatusIndex=this.jComboBoxSaleStatus.getSelectedIndex();
+        if(sale!=null){
+            if(selectedStatusIndex==0){
+                this.daoSale.setSaleStatus(sale.getCode(), SaleStatus.pending);
+            }else if(selectedStatusIndex==1){
+                this.daoSale.setSaleStatus(sale.getCode(), SaleStatus.inProgress);
+            }else{
+                this.daoSale.setSaleStatus(sale.getCode(), SaleStatus.delivered);
+            }
+        
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -679,11 +786,11 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<Object> jComboBoxCustomerAddress;
     private javax.swing.JComboBox<Object> jComboBoxCustomers;
     private javax.swing.JComboBox<Object> jComboBoxProducts;
+    private javax.swing.JComboBox<Object> jComboBoxSaleProducts;
+    private javax.swing.JComboBox<String> jComboBoxSaleStatus;
     private javax.swing.JComboBox<Object> jComboBoxSales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -695,7 +802,9 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -703,12 +812,13 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelLogo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldCustomerCPF;
     private javax.swing.JTextField jTextFieldCustomerCode;
     private javax.swing.JTextField jTextFieldCustomerEmail;
@@ -720,6 +830,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldProductName;
     private javax.swing.JTextField jTextFieldProductPrice;
     private javax.swing.JTextField jTextFieldProductQuantity;
+    private javax.swing.JTextField jTextFieldSaleAddress;
+    private javax.swing.JTextField jTextFieldSaleCustomer;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;

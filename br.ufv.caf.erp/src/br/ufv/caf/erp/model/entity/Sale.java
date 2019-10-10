@@ -86,5 +86,9 @@ public class Sale {
         return products;
     }
     
+    public String toString(){
+        return this.code+"";
+    }
+    
     
 }
