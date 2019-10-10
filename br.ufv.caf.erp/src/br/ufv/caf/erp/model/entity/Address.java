@@ -130,4 +130,8 @@ public class Address {
         this.CEP = CEP;
     }
     
+    public String toString(){
+        return this.CEP+", "+this.getStreet()+", "+this.number+", "+this.getCity();
+    }
+    
 }
